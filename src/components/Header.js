@@ -16,9 +16,9 @@ export default class Header extends Component {
             </div>
             <div className="right-header">
                 
-              <i class="fab fa-free-code-camp link"></i>
-              <i class="fab fa-github-square link"></i>
-              <i class="fab fa-linkedin link" ></i>
+              <i className="fab fa-free-code-camp link"></i>
+              <i className="fab fa-github-square link"></i>
+              <i className="fab fa-linkedin link" ></i>
               <div className="btn">
                 <i className="fas fa-heart"></i>
                 favorites
