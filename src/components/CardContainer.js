@@ -29,7 +29,7 @@ const CardContainer = () => {
         <div className="card-section name-section" style={width}>
           <p>Name</p>
         </div>
-        <div className="card-section name-section" style={width}>
+        <div className="card-section" style={width}>
           <p>Version</p>
         </div>
         <div className="card-section" style={width}>
@@ -59,7 +59,7 @@ const Card = ({ card }) => {
       <div className="card-section name-section" style={width}>
         <p className="name">{card.name}</p>
       </div>
-      <div className="card-section name-section" style={width}>
+      <div className="card-section" style={width}>
         <p>{card.version}</p>
       </div>
       <div className="card-section" style={width}>
