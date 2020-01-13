@@ -20,8 +20,8 @@ export default class Header extends Component {
               <i className="fab fa-github-square link"></i>
               <i className="fab fa-linkedin link" ></i>
               <div className="btn">
-                <i className="fas fa-heart"></i>
-                favorites
+              <i className="fas fa-envelope"></i>
+                contact
               </div>
             </div>
           </div>
