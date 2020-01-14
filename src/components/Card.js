@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Card = ({ card }) => {
+const Card = ({ card, addToFavorites }) => {
   const [cardOpen, setCardOpen] = useState(false);
 
   const copyCDN = cdn => {
@@ -17,7 +17,10 @@ const Card = ({ card }) => {
   const openMore = () => {
     let isOpen = cardOpen;
     setCardOpen((isOpen = !isOpen));
-    
+  };
+
+  const favoriteHandler = (cardId, fav )=> {
+    addToFavorites(cardId, fav);
   };
 
   const sum = 100 / 6;
@@ -30,8 +33,16 @@ const Card = ({ card }) => {
   return (
     <div className="card">
       <div className="card-top">
-        <div className="card-section pointer" style={width}>
-          <i className="far fa-heart heart"></i>
+        <div
+          className="card-section pointer"
+          onClick={() => favoriteHandler(card.id, card.favorite)}
+          style={width}
+        >
+          {card.favorite ? (
+            <i className="fas fa-heart heart"></i>
+          ) : (
+            <i className="far fa-heart heart"></i>
+          )}
         </div>
         <div className="card-section name-section no-wrap" style={width}>
           <p className="name">{card.name}</p>
@@ -62,14 +73,17 @@ const Card = ({ card }) => {
   );
 };
 
-const CardDetails = ({cardDetails}) => {
-    
-  return <div className="card-details">
+const CardDetails = ({ cardDetails }) => {
+  return (
+    <div className="card-details">
       <p>{cardDetails.author}</p>
       <p>{cardDetails.desc}</p>
       <p>{cardDetails.latest}</p>
-      <a href={cardDetails.repo} target="_"><div className="btn dark">repo</div></a>
-  </div>;
+      <a href={cardDetails.repo} target="_">
+        <div className="btn dark">repo</div>
+      </a>
+    </div>
+  );
 };
 
 export default Card;

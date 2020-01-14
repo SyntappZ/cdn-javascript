@@ -1,13 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { getCDN } from "../ApiData.js";
 
-import Card from './Card'
+import Card from "./Card";
 
 const CardContainer = ({ searchValue, updateTotal }) => {
   const [cards, updateCards] = useState([]);
-
+  const [favorites, setFavorites] = useState([]);
   const [cardAmount, setCardAmount] = useState(50);
   let amount = cardAmount;
+
+  const addToFavorites = (cardId, isFavorite) => {
+    if (isFavorite) {
+      let filtered = favorites.filter(x => x !== cardId);
+      setFavorites(filtered);
+      localStorage.setItem("favorites", JSON.stringify(filtered));
+    } else {
+      if (!favorites.includes(cardId)) {
+        setFavorites([...favorites, cardId]);
+        localStorage.setItem(
+          "favorites",
+          JSON.stringify([...favorites, cardId])
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    let storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    storedFavorites ? setFavorites(storedFavorites) : setFavorites([]);
+  }, []);
 
   const scrollHandler = () => {
     const scrollTarget = document.querySelector(".scrollTarget");
@@ -32,7 +53,13 @@ const CardContainer = ({ searchValue, updateTotal }) => {
     .filter(card => {
       return card.name.toLowerCase().includes(searchValue);
     })
-    .map((card, i) => <Card key={i} card={card} />);
+    .map((card, i) => {
+      favorites.includes(card.id)
+        ? (card.favorite = true)
+        : (card.favorite = false);
+
+      return <Card addToFavorites={addToFavorites} key={i} card={card} />;
+    });
 
   let totalCards = cardArray.length;
 
@@ -64,16 +91,12 @@ const CardContainer = ({ searchValue, updateTotal }) => {
             <p>More</p>
           </div>
         </div>
-        
-        <div className="cards">{cardArray}</div>
 
-   
+        <div className="cards">{cardArray}</div>
       </div>
       <div className="scrollTarget"></div>
     </div>
   );
 };
-
-
 
 export default CardContainer;
