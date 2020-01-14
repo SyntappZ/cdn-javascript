@@ -4,6 +4,8 @@ import CardContainer from "./CardContainer";
 const Main = () => {
   const [totalResults, setTotal] = useState(0);
   const [searchValue, setSearchValue] = useState('')
+  const [isOnFavorites, switchFavorites] = useState(false)
+  const [sortCards, setSortCards] = useState(false)
 
   const updateTotal = (total) => {
     setTotal(total);
@@ -12,6 +14,17 @@ const Main = () => {
  const handleSearchInputChange = e => {
   setSearchValue(e.target.value);
   };
+
+  const sortHandler = () => {
+    let sort = sortCards;
+    setSortCards(sort = !sort)
+  }
+
+  const filterFavorites = () => {
+  let favoriteSwitch = isOnFavorites
+  switchFavorites(favoriteSwitch = !favoriteSwitch)
+    
+  }
 
   return (
     <div className="container">
@@ -35,12 +48,14 @@ const Main = () => {
               <i className="fas fa-random"></i>
               <p>random</p>
             </div>
-            <div>
+            <div onClick={sortHandler}>
               <i className="fas fa-sort"></i>
               <p>sort</p>
             </div>
-            <div>
-              <i className="fas fa-heart"></i>
+            <div onClick={filterFavorites}>
+              {isOnFavorites ? <i className="fas fa-heart heart"></i> : 
+              <i className="fas fa-heart"></i> }
+              
               <p>favorites</p>
             </div>
             <div className="btn dark">
@@ -58,7 +73,12 @@ const Main = () => {
             placeholder="Search CDN's"
           />
         </div>
-        <CardContainer searchValue={searchValue} updateTotal={updateTotal} />
+        <CardContainer
+         isOnFavorites={isOnFavorites}
+          searchValue={searchValue}
+           updateTotal={updateTotal}
+           sortCards={sortCards}
+            />
       </div>
     </div>
   );

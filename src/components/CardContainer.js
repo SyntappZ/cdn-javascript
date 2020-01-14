@@ -3,12 +3,15 @@ import { getCDN } from "../ApiData.js";
 
 import Card from "./Card";
 
-const CardContainer = ({ searchValue, updateTotal }) => {
+const CardContainer = ({ searchValue, updateTotal, isOnFavorites, sortCards }) => {
   const [cards, updateCards] = useState([]);
+  const [apiData, setApiData] = useState([])
   const [favorites, setFavorites] = useState([]);
   const [cardAmount, setCardAmount] = useState(50);
   let amount = cardAmount;
 
+
+ 
   const addToFavorites = (cardId, isFavorite) => {
     if (isFavorite) {
       let filtered = favorites.filter(x => x !== cardId);
@@ -39,15 +42,35 @@ const CardContainer = ({ searchValue, updateTotal }) => {
   };
 
   useEffect(() => {
-    getCDN().then(response => {
-      updateCards(response);
-    });
+  
+      getCDN().then(response => {
+        setApiData(response)
+        updateCards(response)
+        });
+    
     window.addEventListener("scroll", scrollHandler);
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    if(isOnFavorites) {
+      let faves = cards.filter(card => favorites.includes(card.id))
+      updateCards(faves)
+    }else{
+      updateCards(apiData)
+    }
+   
+  }, [isOnFavorites]);
+
+  useEffect(() => {
+  let sort = cards.reverse()
+  updateCards(sort)
+    
+  }, [sortCards])
 
   const sum = 100 / 6;
   const mainColor = { color: "#da0952" };
   const width = { width: sum + "%" };
+  
 
   const cardArray = cards
     .filter(card => {
