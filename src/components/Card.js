@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const Card = ({ card, addToFavorites }) => {
   const [cardOpen, setCardOpen] = useState(false);
-
+  
   const copyCDN = cdn => {
-    console.log(cdn);
+   
     const dummy = document.createElement("input");
     document.body.appendChild(dummy);
     dummy.setAttribute("id", "dummy_id");
@@ -27,11 +27,11 @@ const Card = ({ card, addToFavorites }) => {
   const width = { width: sum + "%" };
   let author;
   card.author
-    ? (author = card.author.split(" ", 1).join(""))
+    ? (author = card.author.split(" ", 2).join(" "))
     : (author = "No Author");
 
   return (
-    <div className="card">
+    <div className="card fadeIn" >
       <div className="card-top">
         <div
           className="card-section pointer"
@@ -58,7 +58,7 @@ const Card = ({ card, addToFavorites }) => {
           onClick={() => copyCDN(card.latest)}
           style={width}
         >
-          <i className="fas fa-copy"></i>
+          <i className="fas fa-copy copy-icon"></i>
         </div>
         <div className="card-section pointer" onClick={openMore} style={width}>
           {cardOpen ? (
@@ -68,20 +68,29 @@ const Card = ({ card, addToFavorites }) => {
           )}
         </div>
       </div>
-      {cardOpen ? <CardDetails cardDetails={card} /> : null}
+      {cardOpen ? <CardDetails cardDetails={card} copyCDN={copyCDN} /> : null}
     </div>
   );
 };
 
-const CardDetails = ({ cardDetails }) => {
+const CardDetails = ({ cardDetails, copyCDN }) => {
+const copy = (cdn) => {
+  copyCDN(cdn)
+}
+
   return (
     <div className="card-details">
-      <p>{cardDetails.author}</p>
-      <p>{cardDetails.desc}</p>
-      <p>{cardDetails.latest}</p>
+    
+      <p className="description">{cardDetails.desc}</p>
+      <p className="cdn" onClick={() => copy(cardDetails.latest)}>{cardDetails.latest}</p>
       <a href={cardDetails.repo} target="_">
-        <div className="btn dark">repo</div>
+     
+        <div className="btn dark repo">
+        <i className="fas fa-code-branch"></i>
+        repo
+        </div>
       </a>
+     
     </div>
   );
 };

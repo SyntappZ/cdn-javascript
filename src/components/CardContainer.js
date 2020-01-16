@@ -3,15 +3,19 @@ import { getCDN } from "../ApiData.js";
 
 import Card from "./Card";
 
-const CardContainer = ({ searchValue, updateTotal, isOnFavorites, sortCards }) => {
+const CardContainer = ({
+  searchValue,
+  updateTotal,
+  isOnFavorites,
+  shuffleCards,
+  sortCards
+}) => {
   const [cards, updateCards] = useState([]);
-  const [apiData, setApiData] = useState([])
+  const [apiData, setApiData] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [cardAmount, setCardAmount] = useState(50);
   let amount = cardAmount;
 
-
- 
   const addToFavorites = (cardId, isFavorite) => {
     if (isFavorite) {
       let filtered = favorites.filter(x => x !== cardId);
@@ -41,38 +45,56 @@ const CardContainer = ({ searchValue, updateTotal, isOnFavorites, sortCards }) =
     }
   };
 
-  useEffect(() => {
-  
-      getCDN().then(response => {
-        setApiData(response)
-        updateCards(response)
-        });
-    
-    window.addEventListener("scroll", scrollHandler);
-  }, [])
+  const changeCards = () => {
+    let shuffle = cards;
+    console.log('shuffle')
+    shuffle = shuffle.sort(() => Math.random() - 0.5);
+    updateCards(shuffle);
+    console.log(shuffle);
+  };
 
   useEffect(() => {
-    if(isOnFavorites) {
-      let faves = cards.filter(card => favorites.includes(card.id))
-      updateCards(faves)
-    }else{
-      updateCards(apiData)
+    getCDN().then(response => {
+      setApiData(response);
+      updateCards(response);
+    });
+
+    window.addEventListener("scroll", scrollHandler);
+  }, []);
+
+  useEffect(() => {
+    if (isOnFavorites) {
+      let faves = cards;
+      faves = faves.filter(card => favorites.includes(card.id));
+      updateCards(faves);
+    } else {
+      updateCards(apiData);
     }
    
   }, [isOnFavorites]);
 
-  useEffect(() => {
-  let sort = cards.reverse()
-  updateCards(sort)
-    
-  }, [sortCards])
-
   const sum = 100 / 6;
   const mainColor = { color: "#da0952" };
   const width = { width: sum + "%" };
+  let myCards = cards;
+
+  if(shuffleCards) {
+    myCards.sort(() => Math.random() - 0.5);
+  }
+
+  if(sortCards) {
+     myCards.sort((a, b) =>{
+       let nameA = a.name.toLowerCase();
+       let nameB = b.name.toLowerCase();
+       return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
+     })
+    
+  }
+
   
 
-  const cardArray = cards
+  const cardArray = myCards
+
     .filter(card => {
       return card.name.toLowerCase().includes(searchValue);
     })
@@ -80,7 +102,7 @@ const CardContainer = ({ searchValue, updateTotal, isOnFavorites, sortCards }) =
       favorites.includes(card.id)
         ? (card.favorite = true)
         : (card.favorite = false);
-
+       
       return <Card addToFavorites={addToFavorites} key={i} card={card} />;
     });
 
@@ -94,7 +116,7 @@ const CardContainer = ({ searchValue, updateTotal, isOnFavorites, sortCards }) =
   return (
     <div>
       <div className="cards-wrap">
-        <div className="title-bar">
+        <div className="title-bar" onClick={changeCards}>
           <div className="card-section" style={width}>
             <p>Favorite</p>
           </div>

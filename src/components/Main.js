@@ -6,6 +6,7 @@ const Main = () => {
   const [searchValue, setSearchValue] = useState('')
   const [isOnFavorites, switchFavorites] = useState(false)
   const [sortCards, setSortCards] = useState(false)
+  const [shuffleCards, setShuffleCards] = useState(false)
 
   const updateTotal = (total) => {
     setTotal(total);
@@ -16,13 +17,25 @@ const Main = () => {
   };
 
   const sortHandler = () => {
-    let sort = sortCards;
-    setSortCards(sort = !sort)
+     setSortCards(true)
+     setTimeout(() => {
+      setSortCards(false)
+    }, 10);
+  }
+
+  const randomHandler = () => {
+   
+    setShuffleCards(true);
+    setTimeout(() => {
+      setShuffleCards(false)
+    }, 10);
+    
   }
 
   const filterFavorites = () => {
   let favoriteSwitch = isOnFavorites
   switchFavorites(favoriteSwitch = !favoriteSwitch)
+
     
   }
 
@@ -44,15 +57,15 @@ const Main = () => {
             </div>
           </div>
           <div className="icons-right">
-            <div>
+            <div onClick={randomHandler}>
               <i className="fas fa-random"></i>
-              <p>random</p>
+              <p>Shuffle</p>
             </div>
             <div onClick={sortHandler}>
-              <i className="fas fa-sort"></i>
+            <i className="fas fa-sort-alpha-down"></i>
               <p>sort</p>
             </div>
-            <div onClick={filterFavorites}>
+            <div onClick={filterFavorites} >
               {isOnFavorites ? <i className="fas fa-heart heart"></i> : 
               <i className="fas fa-heart"></i> }
               
@@ -78,6 +91,7 @@ const Main = () => {
           searchValue={searchValue}
            updateTotal={updateTotal}
            sortCards={sortCards}
+           shuffleCards={shuffleCards}
             />
       </div>
     </div>
