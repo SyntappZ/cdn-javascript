@@ -71,9 +71,8 @@ const Main = () => {
               
               <p>favorites</p>
             </div>
-            <div className="btn dark">
-              <i className="fas fa-chevron-down"></i>
-              size
+            <div className="btn dark auth">
+              syntappz
             </div>
           </div>
         </div>

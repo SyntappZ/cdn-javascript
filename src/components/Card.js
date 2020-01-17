@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const Card = ({ card, addToFavorites }) => {
   const [cardOpen, setCardOpen] = useState(false);
-  
+
   const copyCDN = cdn => {
-   
     const dummy = document.createElement("input");
     document.body.appendChild(dummy);
     dummy.setAttribute("id", "dummy_id");
@@ -19,11 +18,14 @@ const Card = ({ card, addToFavorites }) => {
     setCardOpen((isOpen = !isOpen));
   };
 
-  const favoriteHandler = (cardId, fav )=> {
+  const favoriteHandler = (cardId, fav) => {
     addToFavorites(cardId, fav);
   };
 
-  const sum = 100 / 6;
+  const mainWidth = window.innerWidth;
+  let sum;
+  mainWidth > 600 ? (sum = 100 / 6) : (sum = 100 / 4);
+
   const width = { width: sum + "%" };
   let author;
   card.author
@@ -31,7 +33,7 @@ const Card = ({ card, addToFavorites }) => {
     : (author = "No Author");
 
   return (
-    <div className="card fadeIn" >
+    <div className="card fadeIn">
       <div className="card-top">
         <div
           className="card-section pointer"
@@ -47,12 +49,18 @@ const Card = ({ card, addToFavorites }) => {
         <div className="card-section name-section no-wrap" style={width}>
           <p className="name">{card.name}</p>
         </div>
-        <div className="card-section" style={width}>
-          <p>{card.version}</p>
-        </div>
-        <div className="card-section no-wrap name-section " style={width}>
-          <p>{author}</p>
-        </div>
+
+        {mainWidth > 600 ? (
+          <div className="card-section" style={width}>
+            <p>{card.version}</p>
+          </div>
+        ) : null}
+        {mainWidth > 600 ? (
+          <div className="card-section no-wrap name-section " style={width}>
+            <p>{author}</p>
+          </div>
+        ) : null}
+
         <div
           className="card-section pointer"
           onClick={() => copyCDN(card.latest)}
@@ -74,23 +82,34 @@ const Card = ({ card, addToFavorites }) => {
 };
 
 const CardDetails = ({ cardDetails, copyCDN }) => {
-const copy = (cdn) => {
-  copyCDN(cdn)
-}
+  const copy = cdn => {
+    copyCDN(cdn);
+  };
+
+  const mainWidth = window.innerWidth;
+  let author, version;
+  if (mainWidth < 600) {
+    author = <p>{cardDetails.author}</p>;
+    version = <p>{cardDetails.version}</p>;
+  } else {
+    author = null;
+    version = null;
+  }
 
   return (
     <div className="card-details">
-    
       <p className="description">{cardDetails.desc}</p>
-      <p className="cdn" onClick={() => copy(cardDetails.latest)}>{cardDetails.latest}</p>
+      <p className="cdn" onClick={() => copy(cardDetails.latest)}>
+        {cardDetails.latest}
+      </p>
       <a href={cardDetails.repo} target="_">
-     
         <div className="btn dark repo">
-        <i className="fas fa-code-branch"></i>
-        repo
+          <i className="fas fa-code-branch"></i>
+          repo
         </div>
       </a>
-     
+      { version }
+       {  author }
     </div>
   );
 };

@@ -45,14 +45,6 @@ const CardContainer = ({
     }
   };
 
-  const changeCards = () => {
-    let shuffle = cards;
-    console.log('shuffle')
-    shuffle = shuffle.sort(() => Math.random() - 0.5);
-    updateCards(shuffle);
-    console.log(shuffle);
-  };
-
   useEffect(() => {
     getCDN().then(response => {
       setApiData(response);
@@ -70,28 +62,28 @@ const CardContainer = ({
     } else {
       updateCards(apiData);
     }
-   
   }, [isOnFavorites]);
 
-  const sum = 100 / 6;
+
+  const mainWidth = window.innerWidth;
+
+  let sum;
+  mainWidth > 600 ? sum = (100 /  6) : sum = (100 / 4)
   const mainColor = { color: "#da0952" };
   const width = { width: sum + "%" };
   let myCards = cards;
 
-  if(shuffleCards) {
+  if (shuffleCards) {
     myCards.sort(() => Math.random() - 0.5);
   }
 
-  if(sortCards) {
-     myCards.sort((a, b) =>{
-       let nameA = a.name.toLowerCase();
-       let nameB = b.name.toLowerCase();
-       return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
-     })
-    
+  if (sortCards) {
+    myCards.sort((a, b) => {
+      let nameA = a.name.toLowerCase();
+      let nameB = b.name.toLowerCase();
+      return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+    });
   }
-
-  
 
   const cardArray = myCards
 
@@ -102,7 +94,7 @@ const CardContainer = ({
       favorites.includes(card.id)
         ? (card.favorite = true)
         : (card.favorite = false);
-       
+
       return <Card addToFavorites={addToFavorites} key={i} card={card} />;
     });
 
@@ -113,22 +105,28 @@ const CardContainer = ({
   }, [updateTotal, totalCards]);
   cardArray.length = cardAmount;
 
+
+  
   return (
     <div>
       <div className="cards-wrap">
-        <div className="title-bar" onClick={changeCards}>
+        <div className="title-bar">
           <div className="card-section" style={width}>
             <p>Favorite</p>
           </div>
           <div className="card-section name-section" style={width}>
             <p>Name</p>
           </div>
-          <div className="card-section" style={width}>
-            <p>Version</p>
-          </div>
-          <div className="card-section name-section " style={width}>
-            <p>Author</p>
-          </div>
+          {mainWidth > 600 ? (
+            <div className="card-section" style={width}>
+              <p>Version</p>
+            </div>
+          ) : null}
+          {mainWidth > 600 ? (
+            <div className="card-section name-section " style={width}>
+              <p>Author</p>
+            </div>
+          ) : null}
           <div className="card-section" style={width}>
             <p>Copy</p>
           </div>

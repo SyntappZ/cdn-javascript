@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 export default class Header extends Component {
   render() {
+
+    const mainColor = '#da0952'
     return (
       <div className="header">
         <div className="container">
@@ -15,14 +17,21 @@ export default class Header extends Component {
               <p>A-Z</p>
             </div>
             <div className="right-header">
-                
-              <i className="fab fa-free-code-camp link"></i>
-              <i className="fab fa-github-square link"></i>
-              <i className="fab fa-linkedin link" ></i>
-              <div className="btn">
-              <i className="fas fa-envelope"></i>
-                contact
-              </div>
+              <a href="https://www.freecodecamp.org/forum/u/biscuitmanz/summary" target="_blank">
+                <i className="fab fa-free-code-camp link"></i>
+              </a>
+              <a href="https://github.com/SyntappZ" target="_blank">
+                <i className="fab fa-github-square link"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/martyn-dodds-00b2a319b/" target="_blank">
+                <i className="fab fa-linkedin link"></i>
+              </a>
+              <a href="mailto:syntappz@gmail.com" target="_blank">
+                <div className="btn">
+                  <i style={{color: mainColor}} className="fas fa-envelope"></i>
+                  contact
+                </div>
+              </a>
             </div>
           </div>
         </div>
