@@ -290,7 +290,7 @@ a {
 
 .card-details {
   width:100%;
-  min-height:200px;
+  min-height:300px;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   display:flex;
@@ -310,7 +310,8 @@ a {
 
 .description {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: lighter;
+
 }
 
 .cdn {
@@ -319,6 +320,8 @@ a {
   font-size: 16px;
   cursor: pointer;
   padding:10px 0;
+  white-space: normal;
+  word-break: break-all;
 }
 
 
@@ -412,12 +415,12 @@ a {
    top:-130px;
  }
   .card-details {
-    padding:10px 15px;
+    padding:10px 25px;
     min-height: 300px;
   }
   .cdn {
-    font-size: 11px;
-    white-space: normal;
+    font-size: 13px;
+   
   }
   .icons-left {
     display:none;
@@ -427,7 +430,7 @@ a {
   }
   .description  {
     font-size:14px;
-    font-weight: lighter;
+    
   }
 }
 

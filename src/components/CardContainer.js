@@ -69,7 +69,7 @@ const CardContainer = ({
 
   let sum;
   mainWidth > 600 ? sum = (100 /  6) : sum = (100 / 4)
-  const mainColor = { color: "#da0952" };
+  
   const width = { width: sum + "%" };
   let myCards = cards;
 

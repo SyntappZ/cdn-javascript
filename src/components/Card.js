@@ -87,14 +87,6 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
   };
 
   const mainWidth = window.innerWidth;
-  let author, version;
-  if (mainWidth < 600) {
-    author = <p>{cardDetails.author}</p>;
-    version = <p>{cardDetails.version}</p>;
-  } else {
-    author = null;
-    version = null;
-  }
 
   return (
     <div className="card-details">
@@ -108,8 +100,15 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
           repo
         </div>
       </a>
-      { version }
-       {  author }
+    
+      <p style={{ fontWeight: "lighter" }}>
+        <span style={{ fontWeight: "bold" }}>Version: </span>
+        {cardDetails.version}
+      </p>
+      <p style={{ fontWeight: "lighter" }}>
+        <span style={{ fontWeight: "bold" }}>Author: </span>
+        {cardDetails.author}
+      </p>
     </div>
   );
 };
