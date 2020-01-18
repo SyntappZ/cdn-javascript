@@ -88,7 +88,7 @@ const CardContainer = ({
   const cardArray = myCards
 
     .filter(card => {
-      return card.name.toLowerCase().includes(searchValue);
+      return card.name.toLowerCase().includes(searchValue.toLowerCase());
     })
     .map((card, i) => {
       favorites.includes(card.id)

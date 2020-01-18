@@ -94,7 +94,7 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
       <p className="cdn" onClick={() => copy(cardDetails.latest)}>
         {cardDetails.latest}
       </p>
-      <a href={cardDetails.repo} target="_">
+      <a rel="noopener"  href={cardDetails.repo} target="_">
         <div className="btn dark repo">
           <i className="fas fa-code-branch"></i>
           repo
