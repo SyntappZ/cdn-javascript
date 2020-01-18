@@ -22,6 +22,17 @@ const Card = ({ card, addToFavorites }) => {
     addToFavorites(cardId, fav);
   };
 
+  const clickAnimation = (e) => {
+    const elem = e.target;
+    elem.style.transfrom = 'scale(0.4)';
+
+    setTimeout(() => {
+      elem.style.transfrom = 'scale(1)';
+
+    }, 100)
+    copyCDN(card.latest)
+  }
+
   const mainWidth = window.innerWidth;
   let sum;
   mainWidth > 600 ? (sum = 100 / 6) : (sum = 100 / 4);
@@ -63,7 +74,7 @@ const Card = ({ card, addToFavorites }) => {
 
         <div
           className="card-section pointer"
-          onClick={() => copyCDN(card.latest)}
+          onClick={clickAnimation}
           style={width}
         >
           <i className="fas fa-copy copy-icon"></i>
