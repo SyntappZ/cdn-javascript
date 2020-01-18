@@ -64,12 +64,11 @@ const CardContainer = ({
     }
   }, [isOnFavorites]);
 
-
   const mainWidth = window.innerWidth;
 
   let sum;
-  mainWidth > 600 ? sum = (100 /  6) : sum = (100 / 4)
-  
+  mainWidth > 600 ? (sum = 100 / 6) : (sum = 100 / 4);
+
   const width = { width: sum + "%" };
   let myCards = cards;
 
@@ -105,8 +104,6 @@ const CardContainer = ({
   }, [updateTotal, totalCards]);
   cardArray.length = cardAmount;
 
-
-  
   return (
     <div>
       <div className="cards-wrap">
