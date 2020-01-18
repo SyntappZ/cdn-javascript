@@ -17,16 +17,16 @@ export default class Header extends Component {
               <p>A-Z</p>
             </div>
             <div className="right-header">
-              <a href="https://www.freecodecamp.org/forum/u/biscuitmanz/summary" target="_blank">
+              <a rel="noopener noreferrer" href="https://www.freecodecamp.org/forum/u/biscuitmanz/summary" target="_blank">
                 <i className="fab fa-free-code-camp link"></i>
               </a>
-              <a href="https://github.com/SyntappZ" target="_blank">
+              <a rel="noopener noreferrer" href="https://github.com/SyntappZ" target="_blank">
                 <i className="fab fa-github-square link"></i>
               </a>
-              <a href="https://www.linkedin.com/in/martyn-dodds-00b2a319b/" target="_blank">
+              <a rel="noopener noreferrer" href="https://www.linkedin.com/in/martyn-dodds-00b2a319b/" target="_blank">
                 <i className="fab fa-linkedin link"></i>
               </a>
-              <a href="mailto:syntappz@gmail.com" target="_blank">
+              <a rel="noopener noreferrer" href="mailto:syntappz@gmail.com" target="_blank">
                 <div className="btn">
                   <i style={{color: mainColor}} className="fas fa-envelope"></i>
                   contact

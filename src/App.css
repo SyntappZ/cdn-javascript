@@ -1,5 +1,6 @@
 :root {
   --main-color: #da0952;
+  --main-lighter: #f63075;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Baloo+Bhai|Open+Sans&display=swap");
@@ -87,6 +88,11 @@ a {
 .dark {
   background: var(--main-color);
   color: white;
+  transition: .3s;
+}
+
+.dark:hover {
+  background:var(--main-lighter);
 }
 
 .outline {
@@ -322,6 +328,20 @@ a {
   padding:10px 0;
   white-space: normal;
   word-break: break-all;
+  transition: .1s;
+}
+.copy-sec {
+  position: relative;
+}
+
+
+.copied {
+  color:var(--main-color);
+  position: absolute;
+  right:0;
+  transition: 1s ease-out;
+  opacity: 0;
+
 }
 
 
@@ -333,19 +353,19 @@ a {
 }
 @keyframes bounceIn{
   0%{
-    opacity: 0;
+    
     transform: scale(0.3) translate3d(0,0,0);
   }
   50%{
-    opacity: 0.9;
+    
     transform: scale(1.1);
   }
   80%{
-    opacity: 1;
+    
     transform: scale(0.89);
   }
   100%{
-    opacity: 1;
+    
     transform: scale(1) translate3d(0,0,0);
   }
 }
