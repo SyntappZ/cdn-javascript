@@ -19,11 +19,8 @@ function App() {
       top: positionTop
     });
   }
-  
- 
 
   let circles = circleArray.map((circle, i) => {
-  
     return (
       <Circle
         key={i}
@@ -37,16 +34,18 @@ function App() {
 
   return (
     <div className="App">
-      <Header /> 
+      <Header />
       <div className="background">
         {circles}
-        
-          <div className="welcome-text">
+
+        <div className="welcome-text">
           <i className="fas fa-cubes"></i>
-            <h1 className="bubble-text">CDN JavaScript</h1>
-            <p>Search the full cdn.js Database for the latest <br></br> cdn version and repo</p>
-          </div>
-        
+          <h1 className="bubble-text">CDN JavaScript</h1>
+          <p>
+            Search the full cdn.js Database for the latest <br></br> cdn version
+            and repo
+          </p>
+        </div>
       </div>
       <Main />
     </div>

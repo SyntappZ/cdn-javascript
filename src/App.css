@@ -1,5 +1,6 @@
 :root {
   --main-color: #da0952;
+  --main-lighter: #f63075;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Baloo+Bhai|Open+Sans&display=swap");
@@ -87,6 +88,11 @@ a {
 .dark {
   background: var(--main-color);
   color: white;
+  transition: 0.3s;
+}
+
+.dark:hover {
+  background: var(--main-lighter);
 }
 
 .outline {
@@ -118,7 +124,7 @@ a {
 }
 
 .header i {
-  color:white;
+  color: white;
 }
 .inner-header {
   width: 100%;
@@ -245,7 +251,6 @@ a {
   color: rgb(83, 83, 83);
   font-weight: bold;
   margin: 10px auto;
-  
 }
 
 .card-top {
@@ -257,8 +262,6 @@ a {
   font-size: 20px;
 }
 
-
-
 .card-section {
   overflow: hidden;
   height: 100%;
@@ -269,7 +272,6 @@ a {
 
 .card-section i {
   padding: 10px;
-  
 }
 .no-wrap {
   white-space: nowrap;
@@ -277,7 +279,6 @@ a {
 .name {
   color: rgb(144, 3, 52);
   font-weight: bold;
-  
 }
 .heart {
   color: var(--main-color);
@@ -285,45 +286,50 @@ a {
 
 .name-section {
   justify-content: flex-start;
- 
 }
 
 .card-details {
-  width:100%;
-  min-height:300px;
+  width: 100%;
+  min-height: 300px;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
-  display:flex;
- justify-content: space-around;
- flex-direction: column;
- align-items:center;
- padding:20px 100px;
- background:rgb(248, 248, 248);
-
-
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 100px;
+  background: rgb(248, 248, 248);
 }
 .card-details a {
   text-decoration: none;
 }
 
-
-
 .description {
   font-size: 18px;
   font-weight: lighter;
-
 }
 
 .cdn {
-  color:var(--main-color);
+  color: var(--main-color);
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-  padding:10px 0;
+  padding: 10px 0;
   white-space: normal;
   word-break: break-all;
+  transition: 0.1s;
+}
+.copy-sec {
+  position: relative;
 }
 
+.copied {
+  color: var(--main-color);
+  position: absolute;
+  right: 0;
+  transition: 1s ease-out;
+  opacity: 0;
+}
 
 .bounceIn {
   animation-name: bounceIn;
@@ -331,28 +337,24 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
-@keyframes bounceIn{
-  0%{
-    opacity: 0;
-    transform: scale(0.3) translate3d(0,0,0);
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3) translate3d(0, 0, 0);
   }
-  50%{
-    opacity: 0.9;
+  50% {
     transform: scale(1.1);
   }
-  80%{
-    opacity: 1;
+  80% {
     transform: scale(0.89);
   }
-  100%{
-    opacity: 1;
-    transform: scale(1) translate3d(0,0,0);
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
   }
 }
 
 .fadeIn {
   animation-name: fadeIn;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
 }
 
 @keyframes fadeIn {
@@ -363,7 +365,6 @@ a {
     opacity: 1;
   }
 }
-
 
 @media (max-width: 1600px) {
   .container {
@@ -383,7 +384,7 @@ a {
 }
 @media (max-width: 900px) {
   .auth {
-    display:none;
+    display: none;
   }
   .container {
     padding: 0 10px;
@@ -395,7 +396,6 @@ a {
   }
   .title,
   .right-header {
- 
     width: 100%;
     justify-content: center;
   }
@@ -406,31 +406,29 @@ a {
     padding: 0 5px;
   }
   .App {
-    font-size:16px;
+    font-size: 16px;
   }
   .cards-wrap {
-    padding:50px 5px;
+    padding: 50px 5px;
   }
- .total {
-   top:-130px;
- }
+  .total {
+    top: -130px;
+  }
   .card-details {
-    padding:10px 25px;
+    padding: 10px 25px;
     min-height: 300px;
   }
   .cdn {
     font-size: 13px;
-   
   }
   .icons-left {
-    display:none;
+    display: none;
   }
   .icons-right {
-    width:100%;
+    width: 100%;
   }
-  .description  {
-    font-size:14px;
-    
+  .description {
+    font-size: 14px;
   }
 }
 
