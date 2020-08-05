@@ -1,25 +1,34 @@
 let url =
   "https://api.cdnjs.com/libraries?&fields=version,description,repository,author";
 
-export const getCDN = () =>
-  new Promise((resolve, reject) => {
-    fetch(url)
-      .then(response => response.json())
-      .then(results => {
-        const cdnArray = results.results.map((cdn, i) => {
-          return {
-            id: i,
-            name: cdn.name,
-            latest: cdn.latest,
-            version: cdn.version,
-            desc: cdn.description,
-            repo: cdn.repository.url,
-            author: cdn.author,
-            favorite: false
-          };
-        });
+const fetchData = async () => {
+  try {
+    const res = await fetch(url);
+    let { results } = await res.json();
+    
+    if(results.length === 0) {
+      throw 'no results found'
+    }
+    const cdnArray = results.map((cdn, i) => {
+      const repo = cdn.repository;
 
-        resolve(cdnArray);
-      })
-      .catch(err => reject(err));
-  });
+      return {
+        id: i,
+        name: cdn.name,
+        latest: cdn.latest,
+        version: cdn.version,
+        desc: cdn.description || "no description",
+        repo: repo ? repo.url : "",
+        author: cdn.author || "no author",
+        favorite: false,
+      };
+    });
+
+    return cdnArray;
+  } catch (error) {
+    console.error(error)
+    return []
+  }
+};
+
+export { fetchData };

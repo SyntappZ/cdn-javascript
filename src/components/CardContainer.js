@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCDN } from "../ApiData.js";
+import { fetchData } from "../ApiData.js";
 
 import Card from "./Card";
 
@@ -45,12 +45,14 @@ const CardContainer = ({
     }
   };
 
-  useEffect(() => {
-    getCDN().then(response => {
-      setApiData(response);
-      updateCards(response);
-    });
+  const fetchCdnData = async () => {
+    const data = await fetchData()
+     setApiData(data);
+     updateCards(data);
+  }
 
+  useEffect(() => {
+    fetchCdnData()
     window.addEventListener("scroll", scrollHandler);
   }, []);
 

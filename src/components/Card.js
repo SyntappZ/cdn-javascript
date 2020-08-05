@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Card = ({ card, addToFavorites }) => {
   const [cardOpen, setCardOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+// console.log(card)
+  }, [])
+
   const copyCDN = cdn => {
     copiedOpacity();
     const dummy = document.createElement("input");
@@ -116,6 +121,7 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
     copyCDN(cardDetails.latest);
   };
 
+
   const bounce = (elem, scale, time) => {
     setTimeout(() => {
       elem.style.transform = `scale(${scale})`;
@@ -131,6 +137,8 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
     copy();
   };
 
+  const repo = cardDetails.repo
+  
   const mainWidth = window.innerWidth;
 
   return (
@@ -139,10 +147,10 @@ const CardDetails = ({ cardDetails, copyCDN }) => {
       <p className="cdn" onClick={clickAnimation}>
         {cardDetails.latest}
       </p>
-      <a rel="noopener noreferrer" href={cardDetails.repo} target="_">
+      <a className={repo ? '' : 'disabled'} rel="noopener noreferrer" href={repo} target="_">
         <div className="btn dark repo">
           <i className="fas fa-code-branch"></i>
-          repo
+          {repo ? 'repo' : 'no repo'}
         </div>
       </a>
 
